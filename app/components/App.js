@@ -1,5 +1,8 @@
 import React from 'react';
-import { AreaChart } from 'react-easy-chart';
+import { LineChart } from 'react-easy-chart';
+// import { ScatterplotChart } from 'react-easy-chart';
+import customData from '../assets/platformMix.json';
+// '../assets/images/react_logo_512x512.png';
 
 
 const App = () => {
@@ -7,12 +10,20 @@ const App = () => {
     <div>
       <h2 id="heading">React Easy Chart</h2>
       <h3>A basic area chart</h3>
-      <AreaChart
-        width={250}
+      <LineChart
+        axisLabels={{ x: 'Hour', y: 'Percentage' }}
+        xType="time"
+        grid
+        verticalGrid
+        dataPoints
+        xTicks={5}
+        lineColors={['pink', 'cyan']}
+        yDomainRange={[0, 50]}
+        axes
+        interpolate="cardinal"
+        width={500}
         height={250}
-        data={[[{ x: 1, y: 50 },
-            { x: 2, y: 20 },
-            { x: 3, y: 50 }]]}
+        data={customData.data}
       />
     </div>
   );
