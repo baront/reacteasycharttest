@@ -1,14 +1,27 @@
 import React from 'react';
 import { LineChart } from 'react-easy-chart';
 // import { ScatterplotChart } from 'react-easy-chart';
+import { connect } from 'react-redux';
 import customData from '../assets/platformMix.json';
 // '../assets/images/react_logo_512x512.png';
 
+const mapStateToProps = (state) => {
+  return { counter: state };
+};
 
-const App = () => {
+function mapDispatchToProps(dispatch) {
+  return {
+    increment: () => dispatch({ type: 'INCREMENT' }),
+    decrement: () => dispatch({ type: 'DECREMENT' }),
+  };
+}
+
+const App = (Test) => {
   return (
     <div>
-      <h2 id="heading">React Easy Chart</h2>
+      <h2 id="heading">React Easy Chart {Test.counter}</h2>
+      <button onClick={Test.increment}>+</button>
+      <button onClick={Test.decrement}>-</button>
       <h3>A basic area chart</h3>
       <LineChart
         axisLabels={{ x: 'Hour', y: 'Percentage' }}
@@ -29,4 +42,5 @@ const App = () => {
   );
 };
 
-export default App;
+// export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
